@@ -80,7 +80,7 @@ class StreamsSpec extends WordSpec with Matchers with Chapter5 {
       "allow implement the zipAll method that combine two streams" in {
         val streamA = from(1).take(3)
         val streamB = from(10).take(2)
-        
+  
         def zipAll[A, B](s1: Stream[A], s2: Stream[B]): Stream[(Option[A], Option[B])] = {
           unfold((s1, s2)) {
             _ match {
@@ -93,6 +93,12 @@ class StreamsSpec extends WordSpec with Matchers with Chapter5 {
         }
         
         zipAll(streamA, streamB) shouldBe Stream((Some(1), Some(10)), (Some(2), Some(11)), (Some(3), None))
+      }
+    }
+    
+    "resolve 5.14" must {
+      "implement startsWith using functions written" in {
+        startsWith(Stream(1, 2, 3), Stream(1, 2)) shouldBe true
       }
     }
   }
