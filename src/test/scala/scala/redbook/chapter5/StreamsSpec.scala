@@ -101,5 +101,11 @@ class StreamsSpec extends WordSpec with Matchers with Chapter5 {
         startsWith(Stream(1, 2, 3), Stream(1, 2)) shouldBe true
       }
     }
+    
+    "resolve 5.15" must {
+      "implements tails with unfold" in {
+        tails(Stream(1, 2, 3)) shouldBe Stream(Stream(1, 2, 3), Stream(2, 3), Stream(3), Stream())
+      }
+    }
   }
 }

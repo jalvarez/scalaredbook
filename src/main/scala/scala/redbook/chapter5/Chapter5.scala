@@ -48,4 +48,14 @@ trait Chapter5 {
             }
         }).getOrElse(false)
   }
+  
+  def tails[A](stream: Stream[A]): Stream[Stream[A]] = {
+    unfold(Some(stream): Option[Stream[A]]) {
+      _ match {
+        case None => None
+        case Some(Stream.Empty) => Some((Stream.Empty, None))
+        case Some(s @ Stream.cons(_, t)) => Some((s, Some(t)))
+      }
+    }
+  }
 }
