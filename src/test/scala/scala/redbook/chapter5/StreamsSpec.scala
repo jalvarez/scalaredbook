@@ -107,5 +107,11 @@ class StreamsSpec extends WordSpec with Matchers with Chapter5 {
         tails(Stream(1, 2, 3)) shouldBe Stream(Stream(1, 2, 3), Stream(2, 3), Stream(3), Stream())
       }
     }
+    
+    "resolve 5.16 exercise" must {
+      "implements scanRight" in {
+        scanRight(Stream(1, 2, 3), 0)(_ + _).toList shouldBe List(6, 5, 3, 0)
+      }
+    }
   }
 }

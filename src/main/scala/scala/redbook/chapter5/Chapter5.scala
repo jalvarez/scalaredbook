@@ -58,4 +58,18 @@ trait Chapter5 {
       }
     }
   }
+  
+  def scanRight[A](stream: Stream[A], z: A)(f: (A, A) => A): Stream[A] = {
+    def sr(stream: Stream[A], f: (A, A) => A): Stream[A] = {
+      stream match {
+        case Stream.Empty => Stream(z)
+        case Stream.cons(h, t) =>
+          val s1 = sr(t, f)
+          val Stream.cons(h1, t1) = s1
+          Stream.cons(f(h, h1), s1)
+      }
+    }
+    
+    sr(stream, f)
+  }
 }
